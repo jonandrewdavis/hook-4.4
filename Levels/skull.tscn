@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6k7s2ewcuk42"]
+
+[ext_resource type="PackedScene" uid="uid://dj8yjus8t3kbv" path="res://Assets/models/Skull.glb" id="1_fldkj"]
+
+[node name="Skull" instance=ExtResource("1_fldkj")]
+
+[node name="RootNode" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.229813, -0.192836, 0, 0.192836, 0.229813, 0, 0, 0)

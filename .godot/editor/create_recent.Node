@@ -1,0 +1,14 @@
+HBoxContainer
+MeshInstance3D
+CollisionShape3D
+StaticBody3D
+OmniLight3D
+Area3D
+MarginContainer
+Button
+MultiplayerSynchronizer
+Label
+Timer
+AnimationPlayer
+AnimationTree
+Node3D

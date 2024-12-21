@@ -1,0 +1,541 @@
+[gd_scene load_steps=20 format=3 uid="uid://b8njiqmewnmd7"]
+
+[ext_resource type="Script" uid="uid://dckryik1cicqh" path="res://UI/UI.gd" id="1_eg6yc"]
+[ext_resource type="Script" uid="uid://dcm2y0lit2rps" path="res://UI/reticle.gd" id="2_twk2u"]
+[ext_resource type="Texture2D" uid="uid://bidq6qyrhxbld" path="res://Assets/Skeleton-Hand-PNG-Transparent.png" id="3_kxe1s"]
+[ext_resource type="Texture2D" uid="uid://ctobs3kw8k5vp" path="res://Assets/textures/debris2 Blood Overlay.png" id="4_gvqyp"]
+[ext_resource type="AudioStream" uid="uid://c6en6i3rmugwr" path="res://Assets/sound/haunted.mp3" id="5_bew5n"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dd3th"]
+diffuse_texture = ExtResource("4_gvqyp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibchv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jvxo"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="Gradient" id="Gradient_ap35m"]
+offsets = PackedFloat32Array(0.636784, 0.642329)
+colors = PackedColorArray(1, 0.741176, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dpjap"]
+gradient = SubResource("Gradient_ap35m")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prv0v"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5mg5"]
+bg_color = Color(0.890196, 0.890196, 0.890196, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xrpu"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4ixf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wacxy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8v64"]
+bg_color = Color(0.352941, 0.592157, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tpgm"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_kiwjk"]
+resource_name = "blood"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blood:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.278468, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blood/BloodSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.380392), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41tna"]
+_data = {
+&"blood": SubResource("Animation_kiwjk")
+}
+
+[node name="UIRoot" type="Node"]
+script = ExtResource("1_eg6yc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="blood" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="BloodSprite" type="Sprite2D" parent="CanvasLayer/blood"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-288, -180)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("CanvasTexture_dd3th")
+offset = Vector2(960, 510)
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Log" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 506.0
+offset_bottom = 306.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="HelperText" type="Label" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 1717.0
+offset_top = 624.0
+offset_right = 1852.0
+offset_bottom = 691.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 40
+
+[node name="Reticle" type="CenterContainer" parent="CanvasLayer/HUD" node_paths=PackedStringArray("RETICLE_LINES", "root")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_twk2u")
+RETICLE_LINES = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+root = NodePath("../../..")
+
+[node name="Top" type="Line2D" parent="CanvasLayer/HUD/Reticle"]
+points = PackedVector2Array(0, -8, 0, -15)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="CanvasLayer/HUD/Reticle"]
+points = PackedVector2Array(8, 0, 15, 0)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="CanvasLayer/HUD/Reticle"]
+points = PackedVector2Array(0, 8, 0, 15)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="CanvasLayer/HUD/Reticle"]
+points = PackedVector2Array(-8, 0, -15, 0)
+width = 2.0
+
+[node name="BottomLeft" type="PanelContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -66.0
+offset_right = 123.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibchv")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD/BottomLeft"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/BottomLeft/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="PanelCircle" type="Panel" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4jvxo")
+
+[node name="HookRechargeProgress" type="TextureProgressBar" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer/PanelCircle"]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 140.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_dpjap")
+
+[node name="HookSprite" type="Sprite2D" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer/PanelCircle"]
+position = Vector2(65, 70)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_kxe1s")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer/PanelCircle"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -59.0
+offset_right = 20.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_prv0v")
+
+[node name="HookCount" type="Label" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer/PanelCircle/Panel"]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 8.0
+offset_right = 68.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "0"
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD/BottomLeft/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y5mg5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2xrpu")
+show_percentage = false
+
+[node name="Scoreboard" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Scoreboard"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Scoreboard/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4ixf")
+
+[node name="TeamsMargin" type="MarginContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Teams" type="HBoxContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin"]
+layout_mode = 2
+
+[node name="Red" type="VBoxContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red"]
+layout_mode = 2
+text = "Red"
+horizontal_alignment = 1
+
+[node name="RedScore" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red"]
+layout_mode = 2
+
+[node name="RedPlayers" type="VBoxContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red"]
+layout_mode = 2
+
+[node name="Legend" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red/RedPlayers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Kills | Deaths | Team"
+horizontal_alignment = 2
+
+[node name="RedPlayersLabel" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Red/RedPlayers"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.882353, 0.270588, 0, 1)
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams"]
+layout_mode = 2
+
+[node name="Blue" type="VBoxContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue"]
+layout_mode = 2
+text = "Blue
+"
+horizontal_alignment = 1
+
+[node name="BlueScore" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue"]
+layout_mode = 2
+
+[node name="BluePlayers" type="VBoxContainer" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue"]
+layout_mode = 2
+
+[node name="Legend" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue/BluePlayers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Kills | Deaths | Team"
+horizontal_alignment = 2
+
+[node name="BluePlayersLabel" type="Label" parent="CanvasLayer/Scoreboard/MarginContainer/PanelContainer/TeamsMargin/Teams/Blue/BluePlayers"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.290196, 0.541176, 1, 1)
+
+[node name="LastKill" type="Label" parent="CanvasLayer/Scoreboard"]
+layout_mode = 2
+offset_left = 35.0
+offset_top = 32.0
+offset_right = 489.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 12
+
+[node name="SettingsMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -486.5
+offset_right = 486.5
+offset_bottom = 678.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 140
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 200
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/SettingsMenu/MarginContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wacxy")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="SettingsMenuLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Settings (ESC)"
+
+[node name="SensitivityLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Look Sensitivity"
+
+[node name="SensitivitySlider" type="HSlider" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+step = 0.01
+
+[node name="SettingsMenuLabel2" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Sound"
+
+[node name="MasterLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="Master" type="HSlider" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+step = 0.1
+
+[node name="SFXLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="SFX" type="HSlider" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+step = 0.1
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX"
+
+[node name="Music" type="HSlider" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+step = 0.1
+
+[node name="Label" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Controls"
+
+[node name="RichTextLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Left Click: Fire
+Middle Mouse Button  /  F: Hook
+Mouse Thumb Button /  V: Melee
+Scroll Down:  Rifle
+Scroll Up: Shotgun
+CRTL / C: Crouch
+E: Pick up 
+(When holding: Left Click to throw, E to drop)
+
+(Note: No remapping. Controller not supported)"
+
+[node name="buttons" type="HBoxContainer" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Switch" type="Button" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_k8v64")
+text = "Switch Team
+"
+
+[node name="Respawn" type="Button" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_k8v64")
+text = "Respawn
+"
+
+[node name="Quit" type="Button" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_2tpgm")
+text = "Quit
+"
+
+[node name="HostIPContainer" type="HBoxContainer" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HostIPLabel" type="Label" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/HostIPContainer"]
+layout_mode = 2
+text = "Host IP:
+"
+
+[node name="HostIPButton" type="CheckButton" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/HostIPContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Show Host IP"
+
+[node name="HiddenIP" type="LineEdit" parent="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/HostIPContainer"]
+visible = false
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_41tna")
+}
+
+[node name="TeamTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bew5n")
+volume_db = -6.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="value_changed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/SensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/Music" to="." method="_on_music_value_changed"]
+[connection signal="pressed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/buttons/Switch" to="." method="_on_switch_pressed"]
+[connection signal="pressed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/buttons/Respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="CanvasLayer/SettingsMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/HostIPContainer/HostIPButton" to="." method="_on_host_ip_button_toggled"]
+[connection signal="timeout" from="TeamTimer" to="." method="_on_team_timer_timeout"]

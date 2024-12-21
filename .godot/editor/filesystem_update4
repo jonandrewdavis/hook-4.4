@@ -1,0 +1,11 @@
+res://Main.tscn
+res://shared/ui/MinimalUI4/MinimalUI.tres
+res://Assets/materials/desaturation.gdshader
+res://Player3D/Hook.gdshader
+res://Assets/materials/outline.gdshader
+res://Assets/materials/outlineV2SMALL.gdshader
+res://Assets/materials/outlineV2.gdshader
+res://Assets/shaders/static_fire.gdshader
+res://Assets/shaders/outline_v5.gdshader
+res://Assets/shaders/outline_v3.tres
+res://Assets/shaders/outline_v4.tres

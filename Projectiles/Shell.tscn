@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbwtsboyryaa3"]
+
+[ext_resource type="Script" path="res://Projectiles/Shell.gd" id="1_qcfj6"]
+[ext_resource type="ArrayMesh" uid="uid://d2cpuvyvdny4f" path="res://Assets/models/R_Hand_Gun_Bullet.obj" id="2_122ht"]
+[ext_resource type="PackedScene" uid="uid://61hry0ayuigx" path="res://Projectiles/ShellParticles.tscn" id="2_obxt2"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kvipt"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GPUParticles3D:emitting")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="Shell" type="RigidBody3D"]
+script = ExtResource("1_qcfj6")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.319433)
+target_position = Vector3(0, 0, -1)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kvipt")
+
+[node name="ShellParticles" parent="." instance=ExtResource("2_obxt2")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="BoneFinger" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -1.04907e-07, 0, 1, 0, 8.74228e-08, 0, -1.2, 0, 0, 0)
+mesh = ExtResource("2_122ht")

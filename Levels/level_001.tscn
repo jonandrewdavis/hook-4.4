@@ -1,0 +1,447 @@
+[gd_scene load_steps=22 format=3 uid="uid://b1yleqbb8tc7x"]
+
+[ext_resource type="Environment" uid="uid://fffgfrct4uva" path="res://Levels/WorldEnv1.tres" id="1_k70i5"]
+[ext_resource type="Script" uid="uid://bxhrphqnm4pgi" path="res://Levels/Level.gd" id="1_olixi"]
+[ext_resource type="Texture2D" uid="uid://d1t8o3lfiydbi" path="res://Assets/environment/Lava 03 FULL.png" id="5_8odel"]
+[ext_resource type="PackedScene" uid="uid://dqspqeyn8a2p3" path="res://Environment/Team.tscn" id="7_8vki1"]
+[ext_resource type="PackedScene" uid="uid://ylqiyerbcgch" path="res://Environment/TeamRedRing.tscn" id="7_58r4k"]
+[ext_resource type="PackedScene" uid="uid://dyi857vhdlaya" path="res://Environment/Goal.tscn" id="7_ltvuo"]
+[ext_resource type="PackedScene" uid="uid://btvv2hrt8xq6j" path="res://Levels/Platform.tscn" id="7_ub2wk"]
+[ext_resource type="PackedScene" uid="uid://b6k7s2ewcuk42" path="res://Levels/skull.tscn" id="11_olckj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fd5wm"]
+size = Vector3(300, 2, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_haccd"]
+albedo_texture = ExtResource("5_8odel")
+uv1_scale = Vector3(0.08, 0.08, 0.08)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_cngiy"]
+material = SubResource("StandardMaterial3D_haccd")
+size = Vector3(300, 2, 300)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_83pc0"]
+size = Vector3(300, 2, 300)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ive2k"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_rfbxw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamHolder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_58mam"]
+resource_name = "camera rotate"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamHolder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30, 60),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.26573, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cgv2"]
+_data = {
+&"RESET": SubResource("Animation_rfbxw"),
+&"camera rotate": SubResource("Animation_58mam")
+}
+
+[sub_resource type="Animation" id="Animation_tqoc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goal2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Goal2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(18.8741, -2.35055, 1.89407)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GoalProtection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.82726, 2.38507)]
+}
+
+[sub_resource type="Animation" id="Animation_10d50"]
+resource_name = "new_animation"
+length = 40.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goal2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20.1, 30.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(18.8741, -5.2678, -0.966699), Vector3(18.8741, 1.72013, 20.9628), Vector3(18.8741, 1.72013, -21.7519)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GoalProtection:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 20, 30.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0), Vector3(0, 7.40222, 21.5875), Vector3(0, 7.40222, -20.8163)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Goal2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 20.1, 30.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0), Vector3(-0.571997, 0, 0), Vector3(0.572468, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vur6"]
+_data = {
+&"RESET": SubResource("Animation_tqoc8"),
+&"goals": SubResource("Animation_10d50")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iwh2i"]
+properties/0/path = NodePath("Goal2:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Goal2:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("GoalProtection:position")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pqvs5"]
+size = Vector3(60, 45, 60)
+
+[node name="Level" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6175, -1.60313, 3.30273)
+script = ExtResource("1_olixi")
+
+[node name="NewWorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_k70i5")
+
+[node name="DirectionalLightSun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 22, 21)
+
+[node name="DirectionalLightLava" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 19.851, -26.7385, 0)
+light_color = Color(1, 0.207843, 0, 1)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 0.0
+sky_mode = 1
+
+[node name="SpawnsRed" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.156684, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8021, 9.66506, 2.26249)
+gizmo_extents = 1.0
+
+[node name="Marker3D2" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2639, 12.1868, 6.95462)
+gizmo_extents = 1.0
+
+[node name="Marker3D3" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5345, 10.9395, 4.44412)
+gizmo_extents = 1.0
+
+[node name="Marker3D6" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2294, 12.3626, 8.09616)
+gizmo_extents = 1.0
+
+[node name="Marker3D4" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.1501, 8.85757, 5.06713)
+gizmo_extents = 1.0
+
+[node name="Marker3D5" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.186, 8.7356, 7.32563)
+gizmo_extents = 1.0
+
+[node name="Marker3D7" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7346, 11.5096, 9.17735)
+gizmo_extents = 1.0
+
+[node name="Marker3D8" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.7559, 8.7359, 8.64061)
+gizmo_extents = 1.0
+
+[node name="Marker3D9" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2335, 8.67203, 4.01314)
+gizmo_extents = 1.0
+
+[node name="Marker3D11" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.4178, 9.52343, 6.42048)
+gizmo_extents = 1.0
+
+[node name="Marker3D12" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.4178, 9.52343, 2.43036)
+gizmo_extents = 1.0
+
+[node name="Marker3D10" type="Marker3D" parent="SpawnsRed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9473, 10.9493, 0.598398)
+gizmo_extents = 1.0
+
+[node name="SpawnsBlue" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 39.3728, 0.156684, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8021, 9.66506, 2.26249)
+gizmo_extents = 1.0
+
+[node name="Marker3D2" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2639, 12.1868, 6.95462)
+gizmo_extents = 1.0
+
+[node name="Marker3D3" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5345, 10.9395, 4.44412)
+gizmo_extents = 1.0
+
+[node name="Marker3D6" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2294, 12.3626, 8.09616)
+gizmo_extents = 1.0
+
+[node name="Marker3D4" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.1501, 8.85757, 5.06713)
+gizmo_extents = 1.0
+
+[node name="Marker3D8" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5702, 8.85757, 5.06713)
+gizmo_extents = 1.0
+
+[node name="Marker3D9" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5702, 8.85757, 2.39818)
+gizmo_extents = 1.0
+
+[node name="Marker3D10" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4571, 9.48646, 8.71516)
+gizmo_extents = 1.0
+
+[node name="Marker3D11" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4571, 6.99742, 1.02165)
+gizmo_extents = 1.0
+
+[node name="Marker3D13" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.3278, 7.57342, -0.35478)
+gizmo_extents = 1.0
+
+[node name="Marker3D12" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4571, 8.41988, 5.73451)
+gizmo_extents = 1.0
+
+[node name="Marker3D5" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.186, 8.7356, 7.32563)
+gizmo_extents = 1.0
+
+[node name="Marker3D7" type="Marker3D" parent="SpawnsBlue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7346, 11.5096, 9.17735)
+gizmo_extents = 1.0
+
+[node name="Skull" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.89111, 0, 0.453788, 0, 1, 0, -0.453788, 0, -0.89111, -1.82408, 12.6907, 15.58)
+
+[node name="Skull2" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.757633, 0, -0.65268, 0, 1, 0, 0.65268, 0, -0.757633, 3.71354, 5.77806, 4.6992)
+
+[node name="Skull7" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.757633, 0, -0.65268, 0, 1, 0, 0.65268, 0, -0.757633, 17.7557, 14.8835, -3.425)
+
+[node name="Skull8" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.848796, 0, 0.528719, 0, 1, 0, -0.528719, 0, 0.848796, 20.0148, 13.3063, -23.9793)
+
+[node name="Skull9" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.916878, 0, -0.399165, 0, 1, 0, 0.399165, 0, 0.916878, 22.6032, 19.8032, -7.20107)
+
+[node name="Skull10" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.757633, 0, -0.65268, 0, 1, 0, 0.65268, 0, -0.757633, 11.8185, 23.9369, -7.20107)
+
+[node name="Skull17" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.757633, 0, -0.65268, 0, 1, 0, 0.65268, 0, -0.757633, 24.4675, 41.3428, -4.15769)
+
+[node name="Skull18" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.757633, 0, -0.65268, 0.119143, 0.983198, -0.138302, 0.641713, -0.182544, -0.744903, 31.031, 41.3428, 17.088)
+
+[node name="Skull19" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.96339, 0.148173, 0.223435, 0.119143, 0.983198, -0.138302, -0.240173, -0.106618, -0.964857, 19.7422, 45.0887, 17.088)
+
+[node name="Skull20" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.888439, -0.0433852, 0.456938, 0.119143, 0.983198, -0.138302, -0.44326, 0.177314, 0.87868, 19.7422, 32.4339, -11.3647)
+
+[node name="Skull21" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.69596, 0.182045, 0.694621, 0.119143, 0.983198, -0.138302, -0.708127, -0.0134931, -0.705955, 6.78891, 32.4339, -11.3647)
+
+[node name="Skull5" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.94306, 0, 0.332622, -0.0282496, 0.996387, -0.0800941, -0.33142, -0.0849301, -0.939653, 15.497, -13.7462, 16.5135)
+
+[node name="Skull15" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.558367, 0.114284, 0.821684, 0.0679727, 0.980833, -0.18261, -0.826804, 0.157816, 0.539897, 7.71982, -12.1062, -7.44234)
+
+[node name="Skull24" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.379087, -0.194697, -0.904647, 0.0679727, 0.980833, -0.18261, 0.922861, 0.00773358, 0.385055, 23.6047, -16.247, -14.9877)
+
+[node name="Skull25" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.99085, -0.0449753, 0.127253, 0.0679727, 0.980833, -0.18261, -0.116601, 0.189589, 0.974915, 15.5114, 75.81, -8.71283)
+
+[node name="Skull16" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.890795, -0.419047, 0.175739, 0.223459, 0.740723, 0.633558, -0.395664, -0.5251, 0.753471, 18.4148, -2.04864, -26.4137)
+
+[node name="Skull6" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.996321, 0, -0.0856951, 0, 1, 0, 0.0856951, 0, -0.996321, 4.80946, 17.6187, 16.5135)
+
+[node name="Skull3" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28473, 19.1307, 24.5266)
+
+[node name="Skull4" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6189, 20.6784, 19.6588)
+
+[node name="Skull11" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.94306, 0, 0.332622, 0, 1, 0, -0.332622, 0, -0.94306, 23.4534, 14.2858, 7.67845)
+
+[node name="Skull12" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.996321, 0, -0.0856951, 0, 1, 0, 0.0856951, 0, -0.996321, 35.1094, 14.2858, 7.67845)
+
+[node name="Skull13" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0152, 15.7978, 15.6916)
+
+[node name="Skull14" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.9189, 17.3455, 10.8238)
+
+[node name="LavaCollision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60112, -92.1062, -0.140203)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LavaCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.283, 0, -6.48582)
+shape = SubResource("BoxShape3D_fd5wm")
+
+[node name="LavaMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.9382, -90.3538, -5.8726)
+mesh = SubResource("BoxMesh_cngiy")
+
+[node name="LavaArea" type="Area3D" parent="LavaMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LavaMesh/LavaArea"]
+shape = SubResource("BoxShape3D_83pc0")
+
+[node name="Platform3" parent="." instance=ExtResource("7_ub2wk")]
+
+[node name="Platform4" parent="." instance=ExtResource("7_ub2wk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 37.954, 0, 0)
+
+[node name="Goal2" parent="." instance=ExtResource("7_ltvuo")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 18.8741, -2.35055, 1.89407)
+
+[node name="GoalProtection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82726, 2.38507)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalProtection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9443, -5.20615, -0.646342)
+shape = SubResource("SphereShape3D_ive2k")
+
+[node name="CamHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2913, 0, 0)
+
+[node name="LevelCam" type="Camera3D" parent="CamHolder"]
+transform = Transform3D(1, 0, 0, 0, 0.914769, 0.403976, 0, -0.403976, 0.914769, 0, 26.853, 38.467)
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6cgv2")
+}
+autoplay = "camera rotate"
+
+[node name="GoalsAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5vur6")
+}
+speed_scale = 0.2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_iwh2i")
+
+[node name="RedHome" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8425, 9.87612, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RedHome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342117, 2.37108, 0)
+shape = SubResource("BoxShape3D_pqvs5")
+
+[node name="BlueHome" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.2932, 9.87612, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlueHome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342117, 2.37108, 0)
+shape = SubResource("BoxShape3D_pqvs5")
+
+[node name="Skull23" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(0.138965, 0, 2.99678, 0, 3, 0, -2.99678, 0, 0.138965, 3.63755, 23.2917, 0.670052)
+
+[node name="TeamRingRed" parent="." instance=ExtResource("7_58r4k")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4.38023, 31.9361, 1.17426)
+
+[node name="Skull22" parent="." instance=ExtResource("11_olckj")]
+transform = Transform3D(-0.00675429, 0, -2.99999, 0, 3, 0, 2.99999, 0, -0.00675429, 32.9732, 23.0841, 0.670052)
+
+[node name="TeamRing" parent="." instance=ExtResource("7_8vki1")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 32.4127, 32.5965, 1.17426)
+
+[connection signal="body_entered" from="LavaMesh/LavaArea" to="." method="_on_lava_area_body_entered"]
+[connection signal="body_exited" from="LavaMesh/LavaArea" to="." method="_on_lava_area_body_exited"]
+[connection signal="body_entered" from="GoalProtection" to="." method="_on_goal_protection_body_entered"]
+[connection signal="body_exited" from="GoalProtection" to="." method="_on_goal_protection_body_exited"]
+[connection signal="body_entered" from="RedHome" to="." method="_on_red_home_body_entered"]
+[connection signal="body_exited" from="RedHome" to="." method="_on_red_home_body_exited"]
+[connection signal="body_entered" from="BlueHome" to="." method="_on_blue_home_body_entered"]
+[connection signal="body_exited" from="BlueHome" to="." method="_on_blue_home_body_exited"]

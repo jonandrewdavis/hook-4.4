@@ -1,0 +1,177 @@
+[gd_scene load_steps=15 format=3 uid="uid://c5io863yqwynd"]
+
+[ext_resource type="Script" path="res://Player3D/Hook.gd" id="1_pc0vx"]
+[ext_resource type="ArrayMesh" uid="uid://bl60vtxt3ouch" path="res://Assets/models/R_hand_Balled.obj" id="2_0wwig"]
+[ext_resource type="ArrayMesh" uid="uid://cagmoa5wvd4ww" path="res://Assets/models/Bone_Arm.obj" id="2_uxj8n"]
+[ext_resource type="ArrayMesh" uid="uid://dpuawkybdw6n3" path="res://Assets/models/R_hand_Open.obj" id="4_8h1n1"]
+[ext_resource type="Material" uid="uid://c31rm62vcg58u" path="res://Assets/materials/bone.tres" id="4_ujwwm"]
+[ext_resource type="Texture2D" uid="uid://dwayvejisylhv" path="res://Assets/textures/worn_rock_natural_01_diff_WHITE.png" id="5_t5brc"]
+[ext_resource type="Texture2D" uid="uid://bfnm8g0037md1" path="res://Assets/textures/worn_rock_natural_01_nor_gl_4k.png" id="6_a106h"]
+[ext_resource type="Shader" path="res://Assets/materials/outlineV2.gdshader" id="6_y2x25"]
+[ext_resource type="Texture2D" uid="uid://v6trsbpsq5fa" path="res://Assets/textures/worn_rock_natural_01_rough_4k.png" id="7_rqmbb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6r2nm"]
+radius = 0.33
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wauxr"]
+radius = 0.6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_skrpr"]
+render_priority = 0
+shader = ExtResource("6_y2x25")
+shader_parameter/outline_color = null
+shader_parameter/scissor_value = 0.5
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/outline_size = 0.005
+shader_parameter/offset_fres = 0.3
+shader_parameter/fps = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24oc8"]
+next_pass = SubResource("ShaderMaterial_skrpr")
+albedo_texture = ExtResource("5_t5brc")
+metallic_specular = 0.0
+roughness_texture = ExtResource("7_rqmbb")
+emission_enabled = true
+emission_energy_multiplier = 0.3
+emission_texture = ExtResource("5_t5brc")
+normal_enabled = true
+normal_scale = 1.5
+normal_texture = ExtResource("6_a106h")
+rim_enabled = true
+rim = 0.2
+clearcoat_roughness = 0.0
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_texture = ExtResource("5_t5brc")
+refraction_enabled = true
+uv1_scale = Vector3(0.8, 0.8, 0.8)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 2.5
+grow_amount = 3.43
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w3nmj"]
+properties/0/path = NodePath("HookMesh/Claw:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("HookMesh/Claw:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("HookMesh/Claw:top_level")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("HookMesh/Claw/Fist:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("HookMesh/Claw/Open:visible")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("HookMesh/Claw:visible")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("HookMesh/Claw:scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("HookMesh:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("HookMesh/ArmRemote:scale")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("HookMesh/ArmRemote:position")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("HookMesh/Claw/Fist/FistModel:visible")
+properties/10/spawn = true
+properties/10/replication_mode = 2
+properties/11/path = NodePath("HookMesh/Claw/ClawArea/ClawCollision:disabled")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+
+[node name="Hook" type="Node3D"]
+script = ExtResource("1_pc0vx")
+
+[node name="HookMesh" type="Node3D" parent="."]
+
+[node name="Claw" type="Node3D" parent="HookMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+
+[node name="Fist" type="MeshInstance3D" parent="HookMesh/Claw"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.236113)
+
+[node name="FistModel" type="MeshInstance3D" parent="HookMesh/Claw/Fist"]
+transform = Transform3D(-0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, 0, 0, 0)
+material_override = ExtResource("4_ujwwm")
+cast_shadow = 0
+mesh = ExtResource("2_0wwig")
+skeleton = NodePath("../../..")
+
+[node name="Open" type="MeshInstance3D" parent="HookMesh/Claw"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0499669, 0.0780128, 0.294332)
+
+[node name="OpenModel" type="MeshInstance3D" parent="HookMesh/Claw/Open"]
+transform = Transform3D(-0.1, 0, 8.74228e-09, 0, 0.1, 0, -8.74228e-09, 0, -0.1, 0, 0, 0)
+material_override = ExtResource("4_ujwwm")
+cast_shadow = 0
+mesh = ExtResource("4_8h1n1")
+
+[node name="ClawArea" type="Area3D" parent="HookMesh/Claw"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.176656, -0.15521)
+collision_mask = 5
+
+[node name="ClawCollision" type="CollisionShape3D" parent="HookMesh/Claw/ClawArea"]
+shape = SubResource("SphereShape3D_6r2nm")
+
+[node name="HookHurtBox" type="Area3D" parent="HookMesh/Claw"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.308709, -0.219614)
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HookMesh/Claw/HookHurtBox"]
+shape = SubResource("SphereShape3D_wauxr")
+
+[node name="Arm" type="MeshInstance3D" parent="HookMesh"]
+visible = false
+material_override = SubResource("StandardMaterial3D_24oc8")
+cast_shadow = 0
+mesh = ExtResource("2_uxj8n")
+
+[node name="ArmRemote" type="MeshInstance3D" parent="HookMesh"]
+material_override = SubResource("StandardMaterial3D_24oc8")
+cast_shadow = 0
+mesh = ExtResource("2_uxj8n")
+
+[node name="GrappleCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -30)
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 3
+
+[node name="GrappleTimer" type="Timer" parent="."]
+wait_time = 4.2
+one_shot = true
+
+[node name="HookTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Lookpoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_w3nmj")
+
+[connection signal="body_entered" from="HookMesh/Claw/ClawArea" to="." method="_on_claw_area_body_entered"]
+[connection signal="body_entered" from="HookMesh/Claw/HookHurtBox" to="." method="_on_hook_hurt_box_body_entered"]
+[connection signal="timeout" from="GrappleTimer" to="." method="_on_grapple_timer_timeout"]
+[connection signal="timeout" from="HookTimer" to="." method="_on_hook_timer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

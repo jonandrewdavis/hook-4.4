@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nawv5"]
 render_priority = 0
 shader = ExtResource("2_wtkxw")
-shader_parameter/outline_color = null
+shader_parameter/outline_color = Vector4(0, 0, 0, 0)
 shader_parameter/scissor_value = 0.5
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/outline_size = 0.1
